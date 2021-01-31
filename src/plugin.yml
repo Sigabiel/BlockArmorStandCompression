@@ -1,0 +1,7 @@
+name: BlockArmorstandCompression
+author: Sigabiel
+version: 1.0
+main: de.sigabiel.bac.Main
+
+commands:
+   bac:
