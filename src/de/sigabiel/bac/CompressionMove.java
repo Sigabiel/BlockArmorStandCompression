@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import de.sigabiel.bac.utils.EnumDirection;
 import de.sigabiel.bac.utils.ItemBuilder;
 
-// this class is just the handler for the user to move a block compression
 public class CompressionMove {
 
 	private CompressionArea area;
@@ -32,8 +31,7 @@ public class CompressionMove {
 
 		int i = 1;
 		for (EnumDirection dir : EnumDirection.values()) {
-			p.getInventory().setItem(i,
-					new ItemBuilder(Material.PRISMARINE_SHARD).addName("Pos " + dir.name()).setItem());
+			p.getInventory().setItem(i, new ItemBuilder(Material.PRISMARINE_SHARD).addName("Pos " + dir.name()).setItem());
 			i++;
 		}
 		p.getInventory().setItem(8, new ItemBuilder(Material.PRISMARINE_CRYSTALS).addName("§cSwitch mode").setItem());
@@ -48,8 +46,7 @@ public class CompressionMove {
 				if (advanced) {
 					int i = 1;
 					for (EnumDirection dir : EnumDirection.values()) {
-						p.getInventory().setItem(i,
-								new ItemBuilder(Material.PRISMARINE_SHARD).addName("Pos " + dir.name()).setItem());
+						p.getInventory().setItem(i, new ItemBuilder(Material.PRISMARINE_SHARD).addName("Pos " + dir.name()).setItem());
 						i++;
 					}
 
@@ -64,8 +61,7 @@ public class CompressionMove {
 				} else {
 					p.getInventory().setItem(7, new ItemBuilder(Material.NAME_TAG).addName("§a>>").setItem());
 					p.getInventory().setItem(0, new ItemBuilder(Material.NAME_TAG).addName("§a<<").setItem());
-					p.getInventory().setItem(22,
-							new ItemBuilder(Material.NAME_TAG).addName("§aChange Move mode").setItem());
+					p.getInventory().setItem(22, new ItemBuilder(Material.NAME_TAG).addName("§aChange Move mode").setItem());
 					p.sendMessage(Main.PREFIX + "Du bist nun im Single Modus");
 					p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
 
@@ -101,15 +97,13 @@ public class CompressionMove {
 
 					int i = 1;
 					for (EnumDirection dir : EnumDirection.values()) {
-						p.getInventory().setItem(i,
-								new ItemBuilder(Material.STICK).addName("Rot " + dir.name()).setItem());
+						p.getInventory().setItem(i, new ItemBuilder(Material.STICK).addName("Rot " + dir.name()).setItem());
 						i++;
 					}
 				} else {
 					int i = 1;
 					for (EnumDirection dir : EnumDirection.values()) {
-						p.getInventory().setItem(i,
-								new ItemBuilder(Material.PRISMARINE_SHARD).addName("Pos " + dir.name()).setItem());
+						p.getInventory().setItem(i, new ItemBuilder(Material.PRISMARINE_SHARD).addName("Pos " + dir.name()).setItem());
 						i++;
 					}
 

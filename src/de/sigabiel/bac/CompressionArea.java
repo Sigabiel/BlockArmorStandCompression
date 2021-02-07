@@ -14,7 +14,6 @@ import de.sigabiel.bac.utils.EnumBuildType;
 import de.sigabiel.bac.utils.EnumDirection;
 import de.sigabiel.bac.utils.ItemBuilder;
 
-// this class contains all the logic to build a block compression
 public class CompressionArea {
 
 	private World world;
@@ -89,8 +88,7 @@ public class CompressionArea {
 		Main.getInstance().addGlobalIndex();
 
 		taskID = Main.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
-			while (index >= (originalBlocks.size() - 1)
-					|| originalBlocks.get(index).getBlock().getType() == Material.AIR) {
+			while (index >= (originalBlocks.size() - 1) || originalBlocks.get(index).getBlock().getType() == Material.AIR) {
 				index++;
 
 				if (index >= (originalBlocks.size() - 1)) {
@@ -108,14 +106,11 @@ public class CompressionArea {
 	}
 
 	private void buildArmorStand(Location targetLoc, EnumBuildType type) {
-		float x = targetLoc.getBlockX()
-				- (getDifference(fixedPos.getBlockX(), targetLoc.getBlockX()) * type.getMoveValue());
+		float x = targetLoc.getBlockX() - (getDifference(fixedPos.getBlockX(), targetLoc.getBlockX()) * type.getMoveValue());
 
-		float y = targetLoc.getBlockY()
-				- (getDifference(fixedPos.getBlockY(), targetLoc.getBlockY()) * type.getMoveValue());
+		float y = targetLoc.getBlockY() - (getDifference(fixedPos.getBlockY(), targetLoc.getBlockY()) * type.getMoveValue());
 
-		float z = targetLoc.getBlockZ()
-				- (getDifference(fixedPos.getBlockZ(), targetLoc.getBlockZ()) * type.getMoveValue());
+		float z = targetLoc.getBlockZ() - (getDifference(fixedPos.getBlockZ(), targetLoc.getBlockZ()) * type.getMoveValue());
 
 		ArmorStand stand = targetLoc.getWorld().spawn(new Location(targetLoc.getWorld(), x, y, z), ArmorStand.class);
 		stand.setCustomNameVisible(false);
