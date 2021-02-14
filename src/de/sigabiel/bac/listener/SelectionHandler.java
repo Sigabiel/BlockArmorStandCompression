@@ -26,8 +26,7 @@ public class SelectionHandler implements Listener {
 		if (selecting.containsKey(p.getUniqueId()) && en.getType() == EntityType.ARMOR_STAND) {
 
 			ArmorStand stand = (ArmorStand) en;
-			if (stand.isCustomNameVisible() || stand.getCustomName() == null
-					|| !stand.getCustomName().startsWith("bac")) {
+			if (stand.isCustomNameVisible() || stand.getCustomName() == null || !stand.getCustomName().startsWith("bac")) {
 				return;
 			}
 
@@ -50,7 +49,7 @@ public class SelectionHandler implements Listener {
 				}
 			}
 
-			p.sendMessage(Main.PREFIX + "Es das BAC wurde mit " + stands.size() + " Armorstands ausgewählt");
+			p.sendMessage(Main.PREFIX + "You selected a BAC with " + stands.size() + " Armorstands");
 			selecting.remove(p.getUniqueId());
 			Main.getInstance().addBAC(p.getUniqueId(), new CompressionArea(stands));
 
@@ -62,6 +61,14 @@ public class SelectionHandler implements Listener {
 		if (!selecting.containsKey(uuid)) {
 			selecting.put(uuid, range);
 		}
+	}
+
+	public void removePlayer(UUID uuid) {
+		selecting.remove(uuid);
+	}
+
+	public boolean isSelecting(UUID uuid) {
+		return selecting.containsKey(uuid);
 	}
 
 }

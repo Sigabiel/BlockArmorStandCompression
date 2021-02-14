@@ -1,7 +1,6 @@
 package de.sigabiel.bac.cmds;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +10,6 @@ import org.bukkit.entity.Player;
 import de.sigabiel.bac.CompressionArea;
 import de.sigabiel.bac.Main;
 import de.sigabiel.bac.utils.EnumBuildType;
-import de.sigabiel.bac.utils.ItemBuilder;
 
 public class BACCommand implements CommandExecutor {
 
@@ -31,7 +29,7 @@ public class BACCommand implements CommandExecutor {
 
 						if (Main.getInstance().hasBAC(p.getUniqueId())) {
 							Main.getInstance().removeBAC(p.getUniqueId());
-							p.sendMessage(Main.PREFIX + "Dein zuvor selektiertes BAC wurde gelöscht");
+							p.sendMessage(Main.PREFIX + "Your latest BAC was deleted");
 						}
 
 						if (Main.getInstance().getMoveHandler().isMoving(p.getUniqueId())) {
@@ -39,17 +37,16 @@ public class BACCommand implements CommandExecutor {
 						}
 
 						Main.getInstance().getIdleUsers().put(p.getUniqueId(), new Location[2]);
-						p.sendMessage(Main.PREFIX + "Bitte schlage jetzt auf zwei Blöcke um den Bereich zu makieren");
+						p.sendMessage(Main.PREFIX + "Please hit two blocks to select the area of the BAC");
 
 					} else {
-						p.sendMessage(Main.PREFIX + "§cDu erstellst bereits eine Blockcompression");
+						p.sendMessage(Main.PREFIX + "§cYou are already configuring a BAC");
 					}
 				} else if (args[0].equalsIgnoreCase("spawn") && args.length == 2) {
 					if (Main.getInstance().hasBAC(p.getUniqueId())) {
 						CompressionArea area = Main.getInstance().getBAC(p.getUniqueId());
 						if (!area.canBuild()) {
-							p.sendMessage(
-									Main.PREFIX + "Dein BAC ist eine Kopie. Bitte erstelle ein neues um es zu spawnen");
+							p.sendMessage(Main.PREFIX + "You can't spawn you BAC because it doesn't contain the original block area");
 							return false;
 						}
 
@@ -63,23 +60,23 @@ public class BACCommand implements CommandExecutor {
 
 						if (buildType == null) {
 							p.playSound(p.getLocation(), Sound.ENDERDRAGON_HIT, 1, 1);
-							p.sendMessage(Main.PREFIX + "Du hast keine gültige Größe angeben!");
+							p.sendMessage(Main.PREFIX + "The given size isn't valid!");
 							return false;
 						}
-						p.sendMessage(Main.PREFIX + "§aDein BAC wird nun gebaut!");
+						p.sendMessage(Main.PREFIX + "§aYour BAC is buildung now!");
 						p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
 						area.build(p.getLocation(), buildType);
 					} else {
-						p.sendMessage(Main.PREFIX + "§cDu besitzt kein BAC.");
+						p.sendMessage(Main.PREFIX + "§cYou've no BAC!");
 					}
 				} else if (args[0].equalsIgnoreCase("remove")) {
 					if (Main.getInstance().hasBAC(p.getUniqueId())) {
-						p.sendMessage(Main.PREFIX + "§aDein BAC wird nun despawnt!");
+						p.sendMessage(Main.PREFIX + "§aYour BAC's despawning!");
 						p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
 
 						Main.getInstance().getBAC(p.getUniqueId()).deleteLatest();
 					} else {
-						p.sendMessage(Main.PREFIX + "§cDu besitzt kein BAC.");
+						p.sendMessage(Main.PREFIX + "§cYou've no BAC!");
 					}
 				} else if (args[0].equalsIgnoreCase("move")) {
 					if (Main.getInstance().hasBAC(p.getUniqueId())
@@ -88,13 +85,13 @@ public class BACCommand implements CommandExecutor {
 
 						if (!Main.getInstance().getMoveHandler().isMoving(p.getUniqueId())) {
 							Main.getInstance().getMoveHandler().startMoving(p);
-							p.sendMessage(Main.PREFIX + "Du bist nun im den Baumodus");
+							p.sendMessage(Main.PREFIX + "You joined the buildmode");
 						} else {
 							Main.getInstance().getMoveHandler().stopMoving(p);
-							p.sendMessage(Main.PREFIX + "Du hast den Baumodus verlassen!");
+							p.sendMessage(Main.PREFIX + "You left the buildmode");
 						}
 					} else {
-						p.sendMessage(Main.PREFIX + "§cDu besitzt kein BAC.");
+						p.sendMessage(Main.PREFIX + "§cYou've no BAC!");
 					}
 				} else if (args[0].equalsIgnoreCase("amount") && args.length == 2) {
 					if (Main.getInstance().hasBAC(p.getUniqueId())) {
@@ -102,32 +99,34 @@ public class BACCommand implements CommandExecutor {
 							double d = Double.parseDouble(args[1]);
 
 							Main.getInstance().getBAC(p.getUniqueId()).setMoveDuraion(d);
-							p.sendMessage(Main.PREFIX + "Du hast die Geschwindikeit auf " + d + " gesetzt!");
+							p.sendMessage(Main.PREFIX + "You set the Speed to " + d);
 						} else {
-							p.sendMessage(Main.PREFIX + "§cDu befindest dich nicht im Move-Modus");
+							p.sendMessage(Main.PREFIX + "§cYou're not in the buildmode");
 						}
 					} else {
-						p.sendMessage(Main.PREFIX + "§cDu besitzt kein BAC.");
+						p.sendMessage(Main.PREFIX + "§cYou've no BAC!");
 					}
 				} else if (args[0].equalsIgnoreCase("select")) {
 					if (Main.getInstance().hasBAC(p.getUniqueId())) {
-						p.sendMessage(Main.PREFIX + "Dein BAC wurde zur Selektierung aus dem Cache entfernt");
+						p.sendMessage(Main.PREFIX + "Your latest BAC was deleted");
 					}
 
 					int range = 100;
 					if (args.length == 2) {
 						range = Integer.parseInt(args[1]);
 					}
-
-					Main.getInstance().getSelectionHandler().addPlayer(p.getUniqueId(), range);
-					p.sendMessage(Main.PREFIX + "Du bist nun im Selektierungsmodus!");
-					p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-				} else if (args[0].equalsIgnoreCase("debug")) {
-					p.getInventory().addItem(new ItemBuilder(Material.LOG, 1, (short) 15).setItem());
+					if (Main.getInstance().getSelectionHandler().isSelecting(p.getUniqueId())) {
+						Main.getInstance().getSelectionHandler().removePlayer(p.getUniqueId());
+						p.sendMessage(Main.PREFIX + "You've left the selection mode");
+					} else {
+						Main.getInstance().getSelectionHandler().addPlayer(p.getUniqueId(), range);
+						p.sendMessage(Main.PREFIX + "You've joined the selection mode. Please interact with a BAC to select it.");
+						p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
+					}
 				}
 
 			} else {
-				p.sendMessage(Main.PREFIX + "§c Du hast keine Berechtigung für diesen Befehl!");
+				p.sendMessage(Main.PREFIX + "§cYou don't have the required permission to execute this command");
 			}
 		}
 		return false;
@@ -135,12 +134,12 @@ public class BACCommand implements CommandExecutor {
 
 	private void sendInstructions(Player p) {
 		p.sendMessage("§7------------------------------");
-		p.sendMessage("§7/bac create | Erstelle ein neues BAC");
-		p.sendMessage("§7/bac remove | Löscht dein zuletzt gespawntes BAC");
-		p.sendMessage("§7/bac move | Toggelt den Move Modus");
-		p.sendMessage("§7/bac select (<Range (Zahl)>) | Startet den selektierungs Modus");
-		p.sendMessage("§7/bac amount <Zahl> | Setzt die Geschwindikeit");
-		p.sendMessage("§7/bac spawn <big, medium, small> | Spawnt die compression");
+		p.sendMessage("§7/bac create | Creates a new BAC");
+		p.sendMessage("§7/bac remove | Despawns your latest BAC");
+		p.sendMessage("§7/bac move | Toggle build mode");
+		p.sendMessage("§7/bac select (<Range (Zahl)>) | Toggle selection mode");
+		p.sendMessage("§7/bac amount <Zahl> | Set the speed");
+		p.sendMessage("§7/bac spawn <big, medium, small> | Spawns the BAC");
 	}
 
 }

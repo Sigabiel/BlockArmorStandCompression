@@ -54,8 +54,7 @@ public class CompressionArea {
 	public CompressionArea(ArrayList<ArmorStand> stands) {
 		this.armorStands = stands;
 
-		// can build is an indicator for the system if the bac can be spawned or if it's
-		// just moveable
+		// can build is an indicator for the system if the bac can be spawned or if it's only moveable
 		canBuild = false;
 	}
 

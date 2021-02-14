@@ -24,13 +24,13 @@ public class PlayerListener implements Listener {
 			if (Main.getInstance().getIdleUsers().get(p.getUniqueId())[0] == null) {
 				Main.getInstance().getIdleUsers().get(p.getUniqueId())[0] = e.getBlock().getLocation();
 
-				p.sendMessage(Main.PREFIX + "Du hast die erste Position gesetzt!");
+				p.sendMessage(Main.PREFIX + "First position was set!");
 			} else {
 				Main.getInstance().getIdleUsers().get(p.getUniqueId())[1] = e.getBlock().getLocation();
 
-				p.sendMessage(Main.PREFIX + "Du hast die zweite Position gesetzt!");
+				p.sendMessage(Main.PREFIX + "Second position was set!");
 				p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
-				p.sendMessage(Main.PREFIX + "Du hast die Konfiguration deines BAC abgeschlossen.");
+				p.sendMessage(Main.PREFIX + "You've configured you BAC successfully");
 
 				Location[] locs = Main.getInstance().getIdleUsers().get(p.getUniqueId());
 				CompressionArea bac = new CompressionArea(locs[0], locs[1]);
