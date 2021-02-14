@@ -8,3 +8,10 @@ This creates the Illusion of a normal build which is smaller than the typical bl
 You can download the built jar in the [build](https://github.com/Sigabiel/BlockArmorStandCompression/tree/main/build) directory in the repository
 
 After you've done that simply put the plugin in the plugins directory of your folder.
+
+# How to use it?
+There are two offical tutorial videos on how to use this plugin. 
+
+> English Tutorial: [Video](https://www.youtube.com/channel/UC5ovkW3-0052CP88Ffzp8PQ)
+
+> German Tutorial: [Video](https://www.youtube.com/channel/UCHMzGXWWvMKsslq2DHsBO6w)
