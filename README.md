@@ -1,3 +1,6 @@
+[![INVITE](https://img.shields.io/badge/Discord-Invite-brightgreen)](https://discord.gg/7h7u7fu)
+[![SUBSCRIBE](https://img.shields.io/badge/Youtube-Subscribe-red)](https://www.youtube.com/sigabiel)
+
 # What is BlockArmorStandCompression?
 This plugin is able to compress a block area. It's scanning the selected area and
 creates armorstands which have the spefic blocks as head or in their hand.
