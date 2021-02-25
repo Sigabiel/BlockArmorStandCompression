@@ -42,9 +42,10 @@ public class MoveHandler implements Listener {
 	}
 
 	@EventHandler
-	public void onClick(InventoryClickEvent e) {
+	public void onClicked(InventoryClickEvent e) {
 		if (onClick(e.getCurrentItem(), (Player) e.getWhoClicked())) {
 			e.setCancelled(true);
+			e.getWhoClicked().closeInventory();
 		}
 	}
 
