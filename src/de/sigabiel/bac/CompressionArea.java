@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 
@@ -19,9 +20,9 @@ public class CompressionArea {
 	private World world;
 	private int minX, maxX, minY, maxY, minZ, maxZ, index, taskID, globalID;
 	private double moveDuraion = 0.2;
-	private boolean move, canBuild;
+	private boolean move, canBuild, firstPlace;
 	EnumBuildType buildType;
-	private Location fixedPos;
+	private Location fixedPos, lastSpawn;
 	private ArrayList<ArmorStand> armorStands = new ArrayList<>();
 	private ArrayList<Location> originalBlocks = new ArrayList<>();
 	private ArrayList<Location> pasteBlocks = new ArrayList<>();
@@ -83,6 +84,7 @@ public class CompressionArea {
 
 		index = 0;
 		armorStands.clear();
+		firstPlace = true;
 		globalID = Main.getInstance().getGlobalIndex();
 		Main.getInstance().addGlobalIndex();
 
@@ -98,6 +100,14 @@ public class CompressionArea {
 
 			Location targetLoc = pasteBlocks.get(index);
 			buildArmorStand(targetLoc, buildType);
+
+			if (firstPlace) {
+				firstPlace = false;
+				Player p = Bukkit.getPlayer(Main.getInstance().getUUID(this));
+				p.sendMessage(Main.PREFIX + "Your BAC is build at [" + lastSpawn.getBlockX() + ", " + lastSpawn.getBlockY() + ", "
+						+ lastSpawn.getBlockZ() + "]");
+			}
+
 			index++;
 
 		}, 0, 1);
@@ -111,7 +121,8 @@ public class CompressionArea {
 
 		float z = targetLoc.getBlockZ() - (getDifference(fixedPos.getBlockZ(), targetLoc.getBlockZ()) * type.getMoveValue());
 
-		ArmorStand stand = targetLoc.getWorld().spawn(new Location(targetLoc.getWorld(), x, y, z), ArmorStand.class);
+		lastSpawn = new Location(targetLoc.getWorld(), x, y, z);
+		ArmorStand stand = targetLoc.getWorld().spawn(lastSpawn, ArmorStand.class);
 		stand.setCustomNameVisible(false);
 
 		// name is given to indicate the compression later
@@ -139,6 +150,10 @@ public class CompressionArea {
 
 	public boolean canBuild() {
 		return canBuild;
+	}
+
+	public Location getLatestSpawnLoc() {
+		return lastSpawn;
 	}
 
 	public void changeWholePosition(EnumDirection dir) {

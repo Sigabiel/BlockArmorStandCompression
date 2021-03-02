@@ -63,9 +63,11 @@ public class BACCommand implements CommandExecutor {
 							p.sendMessage(Main.PREFIX + "The given size isn't valid!");
 							return false;
 						}
-						p.sendMessage(Main.PREFIX + "§aYour BAC is buildung now!");
+
 						p.playSound(p.getLocation(), Sound.LEVEL_UP, 1, 1);
 						area.build(p.getLocation(), buildType);
+						p.sendMessage(Main.PREFIX + "§aYour BAC is buildung now!");
+
 					} else {
 						p.sendMessage(Main.PREFIX + "§cYou've no BAC!");
 					}
@@ -73,6 +75,11 @@ public class BACCommand implements CommandExecutor {
 					if (Main.getInstance().hasBAC(p.getUniqueId())) {
 						p.sendMessage(Main.PREFIX + "§aYour BAC's despawning!");
 						p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+
+						if (Main.getInstance().getMoveHandler().isMoving(p.getUniqueId())) {
+							Main.getInstance().getMoveHandler().stopMoving(p);
+							p.sendMessage(Main.PREFIX + "You left the buildmode");
+						}
 
 						Main.getInstance().getBAC(p.getUniqueId()).deleteLatest();
 					} else {
