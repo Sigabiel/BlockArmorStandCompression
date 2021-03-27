@@ -1,5 +1,4 @@
 [![INVITE](https://img.shields.io/badge/Discord-Invite-brightgreen)](https://discord.gg/7h7u7fu)
-[![SUBSCRIBE](https://img.shields.io/badge/Youtube-Subscribe-red)](https://www.youtube.com/sigabiel)
 
 # What is BlockArmorStandCompression?
 This plugin is able to compress a block area. It's scanning the selected area and
@@ -8,7 +7,7 @@ This creates the Illusion of a normal build which is smaller than the typical bl
 ![](https://github.com/Sigabiel/BlockArmorStandCompression/blob/images/1.png)
 
 # Download
-You can download the built jar in the [build](https://github.com/Sigabiel/BlockArmorStandCompression/tree/main/build) directory in the repository
+You can download the plugin in the [build](https://github.com/Sigabiel/BlockArmorStandCompression/tree/main/build) directory in the repository
 
 After you've done that simply put the plugin in the plugins directory of your folder.
 
