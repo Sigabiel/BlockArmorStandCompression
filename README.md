@@ -14,9 +14,9 @@ After you've done that simply put the plugin in the plugins directory of your fo
 # How to use it?
 There are two offical tutorial videos on how to use this plugin. 
 
-> English Tutorial: [Video](https://www.youtube.com/channel/UC5ovkW3-0052CP88Ffzp8PQ)
+> English Tutorial: Not available
 
-> German Tutorial: [Video](https://www.youtube.com/channel/UCHMzGXWWvMKsslq2DHsBO6w)
+> German Tutorial: Not available
 
 # About me
 If you like what you are seeing you can join my [discord](https://discord.gg/7h7u7fu) server or [subscribe](https://www.youtube.com/sigabiel) me on youtube.
